@@ -1,18 +1,38 @@
+const checkboxElement = document.getElementById('divStyle');
 
-// 1. Variabel 1: Checkboxen
-const checkboxElement = document.querySelector('input[type="checkbox"]');
-console.log(checkboxElement);
-// 2. Variabel 2: Alla textfält
 const textFieldsCollection = document.querySelectorAll('.textfield');
-console.log(textFieldsCollection);
-// 3. Variabel 3: Knappen
-const buttonElement = document.querySelector('button.my-button');
-console.log(buttonElement);
-// 4. Variabel 4: Div-elementet
-const divElement = document.querySelector('div.my-div');
-console.log(divElement);
-// Test - Du kan nu använda dessa variabler i din JavaScript-kod
+
+const buttonElement = document.getElementById('myButton');
+
+const divElement = document.getElementById('myDiv');
+
+function handleInputEvent(e) {
+    console.log('Avsändare:', e.target);
+
+    const nameAttribute = e.target.name;
+
+    if (nameAttribute === 'content') {
+        divElement.innerHTML = e.target.value;
+    }
+}
+
+textFieldsCollection.forEach(function(textField) {
+    textField.addEventListener('input', handleInputEvent);
+});
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    var colorInput = document.getElementById('color'); 
 
+    checkboxElement.addEventListener("change", function() {
+        var color = colorInput.value; 
 
+        divElement.style.backgroundColor = color;
+
+        console.log("Vald färg:", color);
+    });
+
+    buttonElement.addEventListener("click", function () {
+        divElement.remove();
+    });
+});
